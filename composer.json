@@ -1,0 +1,15 @@
+{
+    "name": "shnellpavel/yandex-mone-payout",
+    "description": "Module for integration with YandexMoney Payouts. See https://tech.yandex.ru/money/doc/payment-solution/payout/",
+    "minimum-stability": "stable",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Shnell Pavel",
+            "email": "shnellpavel@gmail.com"
+        }
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "5.3.*"
+    }
+}
