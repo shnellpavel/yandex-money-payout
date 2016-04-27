@@ -21,7 +21,7 @@ class BalanceRequestParams implements IXMLTransformable
         $this->clientOrderId = $clientOrderId;
     }
 
-    public function toXml()
+    public function asXml()
     {
         $result = new \SimpleXMLElement( '<?xml version="1.0" encoding="UTF-8"?><balanceRequest/>' );
 
@@ -29,6 +29,11 @@ class BalanceRequestParams implements IXMLTransformable
         $result->addAttribute( 'clientOrderId', $this->clientOrderId );
         $result->addAttribute( 'requestDT', date( 'Y-m-d\TH:i:s.000\Z' ) );
 
-        return $result->asXML();
+        return $result;
+    }
+
+    public function toXml()
+    {
+        return $this->asXml()->asXML();
     }
 }
