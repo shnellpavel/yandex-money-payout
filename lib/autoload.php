@@ -8,9 +8,10 @@
 function __autoload( $className )
 {
     $parts = explode( '\\', $className );
+
     if ( $parts[ 0 ] == 'YandexMoney' )
     {
-        require implode('/', array_slice($parts, 1)) . '.php';
+        require __DIR__.'/'.implode('/', array_slice($parts, 1)) . '.php';
     }
 }
 
