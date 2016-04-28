@@ -84,7 +84,7 @@ class PayoutAPI implements IPayoutAPI
             curl_close( $curl );
 
             $result = (array)json_decode( $result );
-            $result = $result[ 'storeCard' ];
+            $result = (array)$result[ 'storeCard' ];
         } catch ( \HttpException $ex )
         {
             echo $ex;
