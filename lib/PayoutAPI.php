@@ -13,19 +13,19 @@ use YandexMoney\interfaces\IPayoutAPI;
 
 class PayoutAPI implements IPayoutAPI
 {
-    const REQ_STATUS_SUCCESS = 0;
+    const REQ_STATUS_SUCCESS     = 0;
     const REQ_STATUS_IN_PROGRESS = 1;
-    const REQ_STATUS_REJECTED = 3;
+    const REQ_STATUS_REJECTED    = 3;
 
     private $requestProvider;
     private $synonimUrl;
 
-    public function __construct( IDispositionRequestProvider $requestProvider, $synonimUrl)
+    public function __construct( IDispositionRequestProvider $requestProvider, $synonimUrl )
     {
         $this->requestProvider = $requestProvider;
     }
 
-    public function getCardSynonim($cardNum)
+    public function getCardSynonim( $cardNum )
     {
         $curl   = curl_init();
         $params = array(
@@ -38,7 +38,7 @@ class PayoutAPI implements IPayoutAPI
             CURLOPT_VERBOSE        => 0,
             CURLOPT_POSTFIELDS     => array(
                 'skr_destinationCardNumber' => $cardNum,
-                'skr_responseFormat' => 'json',
+                'skr_responseFormat'        => 'json',
             )
         );
         curl_setopt_array( $curl, $params );
@@ -53,8 +53,8 @@ class PayoutAPI implements IPayoutAPI
             }
             curl_close( $curl );
 
-            $result = json_decode($result);
-            $result = $result['storeCard'];
+            $result = json_decode( $result );
+            $result = $result[ 'storeCard' ];
         } catch ( \HttpException $ex )
         {
             echo $ex;
@@ -78,8 +78,8 @@ class PayoutAPI implements IPayoutAPI
         return $this->requestProvider->sendRequest( 'balance', $params );
     }
 
-    public function errorDepositionNotification( ErrorDepositionParams $params )
+    public function errorDepositionNotification( $handler )
     {
-        return $this->requestProvider->processRequest($params); // ??
+        return $this->requestProvider->processRequest( $handler );
     }
 }

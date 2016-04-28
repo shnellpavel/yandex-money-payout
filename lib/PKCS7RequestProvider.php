@@ -20,13 +20,17 @@ class PKCS7RequestProvider implements IDispositionRequestProvider
         $this->settings = $settings;
     }
 
-    public function processRequest( IXMLTransformable $params )
+    public function processRequest( $handler )
     {
-        if ( ( $request = $this->verifyData(file_get_contents( "php://input" )) ) == null )
+        if ( ( $request = $this->verifyData( file_get_contents( "php://input" ) ) ) == null )
         {
+            /**
+             * @var IXMLTransformable $params
+             */
+            $params = call_user_func($handler, $request);
             header( "HTTP/1.0 200" );
             header( "Content-Type: application/pkcs7-mime" );
-            $this->signData( $params->toXml() );
+            echo $this->signData( $params->toXml() );
             exit;
         }
     }
@@ -37,7 +41,7 @@ class PKCS7RequestProvider implements IDispositionRequestProvider
         $params = array(
             CURLOPT_RETURNTRANSFER => 1,
             CURLOPT_HTTPHEADER     => array( 'Content-type: application/pkcs7-mime' ),
-            CURLOPT_URL            => rtrim($this->settings->host, '/') . '/webservice/deposition/api/' . trim($dispositionMethod, '/'),
+            CURLOPT_URL            => rtrim( $this->settings->host, '/' ) . '/webservice/deposition/api/' . trim( $dispositionMethod, '/' ),
             CURLOPT_POST           => 0,
             CURLOPT_SSL_VERIFYPEER => false,
             CURLOPT_SSLCERT        => $this->settings->cert,
@@ -63,7 +67,7 @@ class PKCS7RequestProvider implements IDispositionRequestProvider
             echo $ex;
         }
 
-        return $this->verifyData($result);
+        return $this->verifyData( $result );
     }
 
     private function signData( $data )
@@ -100,7 +104,7 @@ class PKCS7RequestProvider implements IDispositionRequestProvider
         }
     }
 
-    private function verifyData($data)
+    private function verifyData( $data )
     {
         $descriptorSpec = array(
             0 => array( "pipe", "r" ),
