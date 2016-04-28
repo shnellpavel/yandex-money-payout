@@ -52,6 +52,7 @@ class PayoutAPI implements IPayoutAPI
     public function __construct( IDispositionRequestProvider $requestProvider, $synonimUrl )
     {
         $this->requestProvider = $requestProvider;
+        $this->synonimUrl      = $synonimUrl;
     }
 
     public function getCardSynonim( $cardNum )
@@ -145,6 +146,6 @@ class PayoutAPI implements IPayoutAPI
             self::ERROR_RECEIVER_PAYMENT_REVERT    => 'Получатель перевода вернул платеж (под получателем понимается сотовый оператор или процессинговый банк).',
         );
 
-        return ((isset($translations[$code])) ? $translations[$code] : $code);
+        return ( ( isset( $translations[ $code ] ) ) ? $translations[ $code ] : $code );
     }
 }
