@@ -66,10 +66,10 @@ class PayoutAPI implements IPayoutAPI
             CURLOPT_SSL_VERIFYPEER => false,
             CURLOPT_SSL_VERIFYHOST => false,
             CURLOPT_VERBOSE        => 0,
-            CURLOPT_POSTFIELDS     => array(
+            CURLOPT_POSTFIELDS     => http_build_query(array(
                 'skr_destinationCardNumber' => $cardNum,
                 'skr_responseFormat'        => 'json',
-            )
+            ))
         );
         curl_setopt_array( $curl, $params );
 
@@ -83,7 +83,7 @@ class PayoutAPI implements IPayoutAPI
             }
             curl_close( $curl );
 
-            $result = json_decode( $result );
+            $result = (array)json_decode( $result );
             $result = $result[ 'storeCard' ];
         } catch ( \HttpException $ex )
         {
