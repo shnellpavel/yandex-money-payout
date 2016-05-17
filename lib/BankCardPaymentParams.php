@@ -26,6 +26,7 @@ class BankCardPaymentParams extends PaymentParams
     public $city;
     public $address;
     public $postcode;
+    public $smsPhoneNumber;
 
     public function asXml()
     {
@@ -47,6 +48,7 @@ class BankCardPaymentParams extends PaymentParams
         $result->addChild( 'pdr_city', $this->city );
         $result->addChild( 'pdr_address', $this->address );
         $result->addChild( 'pdr_postcode', $this->postcode );
+        $result->addChild( 'smsPhoneNumber', $this->smsPhoneNumber );
 
         return $result;
     }
