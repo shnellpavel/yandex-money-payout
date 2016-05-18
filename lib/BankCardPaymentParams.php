@@ -41,7 +41,7 @@ class BankCardPaymentParams extends PaymentParams
         $result->addChild( 'pdr_docIssueYear', date('Y', strtotime($this->docIssueDate)) );
         $result->addChild( 'pdr_docIssueMonth', date('m', strtotime($this->docIssueDate)) );
         $result->addChild( 'pdr_docIssueDay', date('d', strtotime($this->docIssueDate)) );
-        $result->addChild( 'pdr_birthDate', $this->birthDate );
+        $result->addChild( 'pdr_birthDate', date('d.m.Y', strtotime($this->birthDate));
         $result->addChild( 'pdr_birthPlace', $this->birthPlace );
         $result->addChild( 'pdr_docIssuedBy', $this->docIssuedBy );
         $result->addChild( 'pdr_country', $this->country );
