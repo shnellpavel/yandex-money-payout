@@ -18,8 +18,8 @@ class MobilePaymentParams extends PaymentParams
     {
         $result = parent::asXml();
 
-        $result->addChild( 'PROPERTY1', $this->operatorCode );
-        $result->addChild( 'PROPERTY2', $this->phoneNumber );
+        $result->addChild( 'PROPERTY1', sprintf('%03.d', $this->operatorCode) );
+        $result->addChild( 'PROPERTY2', sprintf('%07.d', $this->phoneNumber) );
 
         return $result;
     }
