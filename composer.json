@@ -1,5 +1,5 @@
 {
-    "name": "shnellpavel/yandex-mone-payout",
+    "name": "shnellpavel/yandex-money-payout",
     "description": "Module for integration with YandexMoney Payouts. See https://tech.yandex.ru/money/doc/payment-solution/payout/",
     "minimum-stability": "stable",
     "license": "MIT",
@@ -11,5 +11,10 @@
     ],
     "require-dev": {
         "phpunit/phpunit": "5.3.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "YandexMoney\\": "lib/"
+        }
     }
 }
