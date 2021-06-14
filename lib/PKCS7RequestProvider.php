@@ -82,7 +82,7 @@ class PKCS7RequestProvider implements IDispositionRequestProvider
         {
             $opensslCommand = 'openssl smime -sign -signer ' . $this->settings->cert .
                 ' -inkey ' . $this->settings->privateKey .
-                ' -nochain -nocerts -outform PEM -nodetach -passin pass:' . $this->settings->certPassword;
+                ' -nochain -nocerts -outform PEM -nodetach -passin "pass:' . $this->settings->certPassword . '"';
 
             $process = proc_open( $opensslCommand, $descriptorSpec, $pipes );
             if ( is_resource( $process ) )
