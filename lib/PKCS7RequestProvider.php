@@ -112,7 +112,7 @@ class PKCS7RequestProvider implements IDispositionRequestProvider
             1 => array( "pipe", "w" ),
             2 => array( "pipe", "w" )
         );
-        $verifyCommand  = 'openssl smime -verify -inform PEM -nointern' .
+        $verifyCommand  = 'openssl smime -verify -noverify -inform PEM -nointern' .
             ' -certfile ' . $this->settings->yaCert .
             ' -CAfile ' . $this->settings->yaCert;
 
