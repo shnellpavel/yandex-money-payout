@@ -5,7 +5,7 @@
  * Time: 19:33
  */
 
-function __autoload( $className )
+function YandexMoney_autoload( $className )
 {
     $parts = explode( '\\', $className );
 
@@ -15,4 +15,4 @@ function __autoload( $className )
     }
 }
 
-spl_autoload_register( '__autoload' );
+spl_autoload_register( 'YandexMoney_autoload' );
